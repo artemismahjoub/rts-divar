@@ -1,6 +1,6 @@
 import React from "react";
 import { checkOTP } from "services/auth";
-import { setCookie } from "styles/cookie";
+import { setCookie } from "utils/cookie";
 
 type Props = {
   code: string;
