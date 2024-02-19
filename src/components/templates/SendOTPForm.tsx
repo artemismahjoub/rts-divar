@@ -1,5 +1,6 @@
 import React from "react";
-import { sendOTP } from "../../services/auth";
+import { toast } from "react-toastify";
+import { sendOTP } from "services/auth";
 
 type Props = {
   mobile: string;
@@ -8,11 +9,19 @@ type Props = {
 };
 
 const SendOTPForm = ({ mobile, setMobile, setStep }: Props) => {
+  const showToastMessage = () => {
+    toast.error("خطا در ارسال کد تایید");
+  };
+
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (mobile.length !== 11) return;
     const { response, error } = await sendOTP(mobile);
-    console.log({ response, error });
+    if (response) setStep(2);
+    if (error) {
+      console.log(error.response.data.message);
+      showToastMessage();
+    }
   };
 
   return (
