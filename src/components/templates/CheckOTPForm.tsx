@@ -1,5 +1,8 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+
 import { checkOTP } from "services/auth";
+import { getProfile } from "services/user";
 import { setCookie } from "utils/cookie";
 
 type Props = {
@@ -10,13 +13,17 @@ type Props = {
 };
 
 const CheckOTPForm = ({ code, setCode, mobile, setStep }: Props) => {
+  const navigate = useNavigate();
+  const { refetch } = useQuery(["profile"], getProfile);
+
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (code.length !== 5) return;
     const { response, error } = await checkOTP(mobile, code);
     if (response) {
-      console.log(response);
+      navigate("/");
+      refetch();
       setCookie(response.data);
     }
     if (error) {
