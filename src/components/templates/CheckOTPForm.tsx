@@ -14,6 +14,7 @@ type Props = {
 
 const CheckOTPForm = ({ code, setCode, mobile, setStep }: Props) => {
   const navigate = useNavigate();
+
   const { refetch } = useQuery(["profile"], getProfile);
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
