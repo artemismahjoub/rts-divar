@@ -5,6 +5,8 @@ import { checkOTP } from "services/auth";
 import { getProfile } from "services/user";
 import { setCookie } from "utils/cookie";
 
+import styles from "./CheckOTPForm.module.css";
+
 type Props = {
   code: string;
   setCode: React.Dispatch<React.SetStateAction<string>>;
@@ -33,7 +35,7 @@ const CheckOTPForm = ({ code, setCode, mobile, setStep }: Props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className={styles.form}>
       <p>تایید کد ارسال شده</p>
       <span>کد ارسال شده به شماره ی «{mobile}» را وارد کنید.</span>
       <label htmlFor="input">کد تایید را وارد کنید</label>
@@ -45,7 +47,9 @@ const CheckOTPForm = ({ code, setCode, mobile, setStep }: Props) => {
         onChange={(e) => setCode(e.target.value)}
       />
       <button type="submit">ورود</button>
-      <button onClick={() => setStep(1)}>تغییر شماره موبایل</button>
+      <button onClick={() => setStep(1)} className={styles.backButton}>
+        تغییر شماره موبایل
+      </button>
     </form>
   );
 };
