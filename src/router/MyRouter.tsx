@@ -2,10 +2,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import HomePage from "pages/HomePage";
-import DashboardPage from "pages/DashboardPage";
-import AuthPage from "pages/AuthPage";
 import AdminPage from "pages/AdminPage";
+import AuthPage from "pages/AuthPage";
+import DashboardPage from "pages/DashboardPage";
 import PageNotFound from "pages/404";
+import Loader from "components/modules/Loader";
 import { getProfile } from "services/user";
 
 type Props = {};
@@ -15,7 +16,7 @@ const MyRouter = (props: Props) => {
   console.log({ data, isLoading, error });
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
 
   return (
