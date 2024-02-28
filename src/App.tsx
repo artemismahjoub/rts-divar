@@ -6,6 +6,7 @@ import Router from "router/MyRouter";
 
 import defaultOptions from "configs/reactQuery";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Layout from "layouts/Layout";
 
 function App() {
   const queryClient = new QueryClient({ defaultOptions });
@@ -13,7 +14,9 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <Router />
+          <Layout>
+            <Router />
+          </Layout>
         </BrowserRouter>
         <ToastContainer
           position="bottom-right"
